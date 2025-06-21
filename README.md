@@ -6,6 +6,7 @@
 - Configure tailwindCSS
 - Header
 - Login form
+- Signup form
 
 # Features
 
