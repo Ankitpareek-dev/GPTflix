@@ -1,9 +1,7 @@
+import Body from "./components/Body";
+
 function App() {
-  return (
-    <>
-      <div>Hello Netflix</div>
-    </>
-  );
+  return <Body />;
 }
 
 export default App;
