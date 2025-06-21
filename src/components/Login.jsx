@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidData } from "../utils/validate";
 function Login() {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleButtonClick = () => {
+    const message = checkValidData(email.current.value, password.current.value);
+
+    setErrorMessage(message);
+  };
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
@@ -22,7 +32,10 @@ function Login() {
       </div>
 
       {/* Login Form */}
-      <form className="relative z-10 w-full max-w-md mx-auto mt-24 bg-black/50 text-white p-10 rounded-2xl ">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="relative z-10 w-full max-w-md mx-auto mt-24 bg-black/50 text-white p-10 rounded-2xl "
+      >
         <h1 className="text-3xl font-bold mb-6">
           {isSignInForm ? "Sign in" : "Sign up"}
         </h1>
@@ -35,18 +48,23 @@ function Login() {
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email or phone number"
           className="w-full p-3 mb-4 rounded bg-neutral-800 placeholder-gray-400 focus:outline-none"
         />
 
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="w-full p-3 mb-6 rounded bg-neutral-800 placeholder-gray-400 focus:outline-none"
         />
-
-        <button className="w-full bg-red-600 hover:bg-red-700 transition-colors duration-200 text-white font-semibold py-3 rounded cursor-pointer">
+        <p className="text-red-500 pb-4">{errorMessage}</p>
+        <button
+          onClick={handleButtonClick}
+          className="w-full bg-red-600 hover:bg-red-700 transition-colors duration-200 text-white font-semibold py-3 rounded cursor-pointer"
+        >
           {isSignInForm ? "Sign in" : "Sign up"}
         </button>
 
