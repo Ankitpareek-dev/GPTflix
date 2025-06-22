@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function Login() {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -14,6 +15,7 @@ function Login() {
   const email = useRef(null);
   const password = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleButtonClick = () => {
     const message = checkValidData(email.current.value, password.current.value);
@@ -32,6 +34,7 @@ function Login() {
           // Signed up
           const user = userCredential.user;
           console.log("signed up successfully");
+
           navigate("/browse");
           // ...
         })
@@ -51,6 +54,7 @@ function Login() {
           const user = userCredential.user;
           console.log("signed in successfully");
           navigate("/browse");
+
           // ...
         })
         .catch((error) => {
