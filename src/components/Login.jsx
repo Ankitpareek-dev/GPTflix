@@ -4,14 +4,17 @@ import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 function Login() {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
   const navigate = useNavigate();
@@ -33,11 +36,24 @@ function Login() {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          console.log("signed up successfully");
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+          }).then(() => {
+            const { uid, email, displayName } = auth.currentUser;
+            console.log(auth.currentUser);
+            dispatch(
+              addUser({
+                uid: uid,
+                email: email,
+                name: displayName,
+              })
+            );
+            navigate("/browse");
+          });
 
-          navigate("/browse");
           // ...
         })
+
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
@@ -93,6 +109,7 @@ function Login() {
 
         {!isSignInForm && (
           <input
+            ref={name}
             type="text"
             placeholder="Name"
             className="w-full p-3 mb-4 rounded bg-neutral-800 placeholder-gray-400 focus:outline-none"

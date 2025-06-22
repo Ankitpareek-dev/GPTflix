@@ -2,13 +2,14 @@ import { signOut } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function Header() {
-  const dispatch = useDispatch();
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-  const isUserLoggedIn = useSelector((state) => state.user);
+  const isUserLoggedIn = useSelector((store) => store.user);
+
+  const userName = isUserLoggedIn?.name;
 
   console.log(isUserLoggedIn);
 
@@ -55,7 +56,7 @@ function Header() {
                   alt="User"
                   className="h-8 w-8 rounded-full mr-3"
                 />
-                <span className="text-sm font-medium">User1</span>
+                <span className="text-sm font-medium">{userName}</span>
               </div>
               <ul className="text-sm mt-2 space-y-2 px-4">
                 <li className="hover:underline cursor-pointer">Account</li>
