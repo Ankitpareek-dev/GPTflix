@@ -63,7 +63,7 @@ function Login() {
         <p className="text-red-500 pb-4">{errorMessage}</p>
         <button
           onClick={handleButtonClick}
-          className="w-full bg-red-600 hover:bg-red-700 transition-colors duration-200 text-white font-semibold py-3 rounded cursor-pointer"
+          className="w-full bg-yellow-600 hover:bg-red-700 transition-colors duration-200 text-white font-semibold py-3 rounded cursor-pointer"
         >
           {isSignInForm ? "Sign in" : "Sign up"}
         </button>
