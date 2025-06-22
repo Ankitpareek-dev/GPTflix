@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 function Login() {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -11,6 +16,43 @@ function Login() {
     const message = checkValidData(email.current.value, password.current.value);
 
     setErrorMessage(message);
+
+    if (message) return;
+
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log("signed up successfully");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("signed in successfully");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    }
   };
 
   const toggleSignInForm = () => {
@@ -63,7 +105,7 @@ function Login() {
         <p className="text-red-500 pb-4">{errorMessage}</p>
         <button
           onClick={handleButtonClick}
-          className="w-full bg-yellow-600 hover:bg-red-700 transition-colors duration-200 text-white font-semibold py-3 rounded cursor-pointer"
+          className="w-full bg-red-600 hover:bg-red-700 transition-colors duration-200 text-white font-semibold py-3 rounded cursor-pointer"
         >
           {isSignInForm ? "Sign in" : "Sign up"}
         </button>
