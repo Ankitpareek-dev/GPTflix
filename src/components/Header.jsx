@@ -1,13 +1,33 @@
-import { signOut } from "firebase/auth";
-import { useState } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice";
+import { NETFLIX_LOGO_URL, USER_AVATAR } from "../utils/constantValues";
 
 function Header() {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const isUserLoggedIn = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        //user is signed in
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid: uid, email: email, name: displayName }));
+        navigate("/browse");
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const userName = isUserLoggedIn?.name;
 
@@ -24,6 +44,7 @@ function Header() {
         navigate("/");
       })
       .catch((error) => {
+        console.error(error);
         navigate("/error");
       });
   };
@@ -31,17 +52,13 @@ function Header() {
   return (
     <div className="bg-gradient-to-b from-black px-8 py-4 z-10 flex justify-between items-center relative">
       {/* Netflix Logo */}
-      <img
-        className="w-36 md:w-44"
-        src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-        alt="Netflix Logo"
-      />
+      <img className="w-36 md:w-44" src={NETFLIX_LOGO_URL} alt="Netflix Logo" />
 
       {/* Avatar & Dropdown */}
       {isUserLoggedIn && (
         <div className="relative">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+            src={USER_AVATAR}
             alt="User Avatar"
             className="h-10 w-10 rounded cursor-pointer"
             onClick={handleButtonClick}
