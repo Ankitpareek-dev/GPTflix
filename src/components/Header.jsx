@@ -31,8 +31,6 @@ function Header() {
 
   const userName = isUserLoggedIn?.name;
 
-  console.log(isUserLoggedIn);
-
   const handleButtonClick = () => {
     setShowUserMenu((prev) => !prev);
   };
@@ -50,7 +48,7 @@ function Header() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-black px-8 py-4 z-10 flex justify-between items-center relative">
+    <div className="w-screen bg-gradient-to-b from-black px-8 py-4 z-10 flex justify-between items-center absolute">
       {/* Netflix Logo */}
       <img className="w-36 md:w-44" src={NETFLIX_LOGO_URL} alt="Netflix Logo" />
 
@@ -63,7 +61,6 @@ function Header() {
             className="h-10 w-10 rounded cursor-pointer"
             onClick={handleButtonClick}
           />
-
           {/* Dropdown */}
           {showUserMenu && (
             <div className="absolute right-0 top-12 bg-[#2e2e2e] text-white w-36 rounded-lg shadow-lg py-3 text-center">
