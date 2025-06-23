@@ -1,5 +1,5 @@
 function VideoTitle({ title, overview }) {
-  console.log(title);
+  // console.log(title);
   return (
     <div className="w-screen aspect-video bg-gradient-to-r from-black/70 px-6 pl-18 absolute pt-[20%]">
       <h1 className="text-6xl w-2xl font-bold text-white ">{title}</h1>

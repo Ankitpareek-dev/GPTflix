@@ -11,7 +11,7 @@ function useFetchTrailerData(movieId) {
       `https://api.themoviedb.org/3/movie/${movieId}/videos`,
       API_OPTIONS
     );
-    console.log(movieId);
+    // console.log(movieId);
     const { results } = await data.json();
     // console.log(results);
 
@@ -20,7 +20,7 @@ function useFetchTrailerData(movieId) {
     );
     dispatch(addTrailerVideo(trailer[0].key));
     // setTrailerId(trailer[0].key);
-    console.log(`https://www.youtube.com/watch?v=${trailer[0].key}`);
+    // console.log(`https://www.youtube.com/watch?v=${trailer[0].key}`);
   };
   useEffect(() => {
     getMovieVideos();
