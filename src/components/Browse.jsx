@@ -6,11 +6,11 @@ import SecondaryContainer from "./SecondaryContainer";
 function Browse() {
   useNowPlayingMovies();
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Header />
       <MainContainer />
       <SecondaryContainer />
-    </>
+    </div>
   );
 }
 

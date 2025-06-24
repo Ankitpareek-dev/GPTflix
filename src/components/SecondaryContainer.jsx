@@ -6,11 +6,11 @@ function SecondaryContainer() {
   const movies = useSelector((store) => store.movies);
   // console.log(movies);
   return (
-    <div className="-mt-64 relative z-20 bg-black">
-      <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
-      <MovieList title={"Trending"} movies={movies.nowPlayingMovies} />
-      <MovieList title={"Upcoming Movies"} movies={movies.nowPlayingMovies} />
-      <MovieList title={"Horror Moveis"} movies={movies.nowPlayingMovies} />
+    <div className="relative z-80 bg-black mt-0">
+      <MovieList title="Now Playing" movies={movies.nowPlayingMovies} />
+      <MovieList title="Trending" movies={movies.trendingMovies} />
+      <MovieList title="Top Rated" movies={movies.topRatedMovies} />
+      {/* Add more categories as needed */}
     </div>
   );
 }

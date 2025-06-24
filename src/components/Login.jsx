@@ -87,12 +87,12 @@ function Login() {
     setIsSignInForm(!isSignInForm);
   };
   return (
-    <div className="relative w-full h-screen font-sans">
+    <div className="relative w-full min-h-screen font-sans">
       {/* Header */}
       <Header />
 
       {/* Background Image */}
-      <div className="absolute top-0 left-0 w-full h-full -z-10">
+      <div className="fixed inset-0 -z-10">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/8200f588-2e93-4c95-8eab-ebba17821657/web/IN-en-20250616-TRIFECTA-perspective_9cbc87b2-d9bb-4fa8-9f8f-a4fe8fc72545_medium.jpg"
           alt="Background"
@@ -104,9 +104,9 @@ function Login() {
       {/* Login Form */}
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="relative z-10 w-full max-w-md mx-auto mt-24 bg-black/50 text-white p-10 rounded-2xl "
+        className="relative z-10 w-[90%] sm:w-4/5 md:w-3/5 lg:w-[28rem] mx-auto mt-24 bg-black/60 text-white p-6 sm:p-8 md:p-10 rounded-2xl"
       >
-        <h1 className="text-3xl font-bold mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-6">
           {isSignInForm ? "Sign in" : "Sign up"}
         </h1>
 
@@ -118,6 +118,7 @@ function Login() {
             className="w-full p-3 mb-4 rounded bg-neutral-800 placeholder-gray-400 focus:outline-none"
           />
         )}
+
         <input
           ref={email}
           type="text"
@@ -131,7 +132,9 @@ function Login() {
           placeholder="Password"
           className="w-full p-3 mb-6 rounded bg-neutral-800 placeholder-gray-400 focus:outline-none"
         />
+
         <p className="text-red-500 pb-4">{errorMessage}</p>
+
         <button
           onClick={handleButtonClick}
           className="w-full bg-red-600 hover:bg-red-700 transition-colors duration-200 text-white font-semibold py-3 rounded cursor-pointer"

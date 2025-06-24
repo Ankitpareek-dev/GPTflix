@@ -48,9 +48,13 @@ function Header() {
   };
 
   return (
-    <div className="w-screen bg-gradient-to-b from-black px-8 py-4 z-10 flex justify-between items-center absolute">
+    <div className="fixed top-0 left-0 w-full z-50 bg-gradient-to-b from-black px-4 sm:px-6 md:px-12 py-3 sm:py-4 flex justify-between items-center">
       {/* Netflix Logo */}
-      <img className="w-36 md:w-44" src={NETFLIX_LOGO_URL} alt="Netflix Logo" />
+      <img
+        className="w-24 sm:w-28 md:w-36 lg:w-44"
+        src={NETFLIX_LOGO_URL}
+        alt="Netflix Logo"
+      />
 
       {/* Avatar & Dropdown */}
       {isUserLoggedIn && (
@@ -58,28 +62,31 @@ function Header() {
           <img
             src={USER_AVATAR}
             alt="User Avatar"
-            className="h-10 w-10 rounded cursor-pointer"
+            className="h-8 w-8 sm:h-10 sm:w-10 rounded-full cursor-pointer"
             onClick={handleButtonClick}
           />
+
           {/* Dropdown */}
           {showUserMenu && (
-            <div className="absolute right-0 top-12 bg-[#2e2e2e] text-white w-36 rounded-lg shadow-lg py-3 text-center">
-              <div className="flex items-center px-4 pb-3 border-b border-gray-600 ">
+            <div className="absolute right-0 top-12 sm:top-14 bg-[#2e2e2e]/90 backdrop-blur-sm text-white w-36 sm:w-40 rounded-xl shadow-xl py-3 flex flex-col items-center">
+              <div className="flex items-center px-4 pb-3 border-b border-gray-600 w-full">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+                  src={USER_AVATAR}
                   alt="User"
-                  className="h-8 w-8 rounded-full mr-3"
+                  className="h-6 w-6 sm:h-8 sm:w-8 rounded-full mr-3"
                 />
-                <span className="text-sm font-medium">{userName}</span>
+                <span className="text-sm font-medium truncate max-w-[90px]">
+                  {userName}
+                </span>
               </div>
-              <ul className="text-sm mt-2 space-y-2 px-4">
+              <ul className="text-sm mt-2 space-y-2 px-4 text-left w-full">
                 <li className="hover:underline cursor-pointer">Account</li>
                 <li className="hover:underline cursor-pointer">Settings</li>
                 <li className="hover:underline cursor-pointer">Help Center</li>
               </ul>
               <button
                 onClick={handleSignOut}
-                className="mt-4 w-1/2 bg-red-600 hover:bg-red-700 transition text-sm font-semibold py-2 rounded-lg"
+                className="mt-4 bg-red-600 hover:bg-red-700 transition text-sm font-semibold py-2 px-4 rounded-md"
               >
                 Sign Out
               </button>
