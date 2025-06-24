@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 function CardList({ title, movies }) {
   const [page, setPage] = useState(0);
   if (!movies) return null;
-  const cardsPerPage = 5;
+  const cardsPerPage = 8;
   const totalPages = Math.ceil(movies.length / cardsPerPage);
 
   const handlePrev = () => {
@@ -19,7 +19,7 @@ function CardList({ title, movies }) {
   const translateX = `-${page * (100 / totalPages)}%`;
 
   return (
-    <div className="space-y-4 relative w-full">
+    <div className="space-y-4 relative w-full mb-11">
       <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white px-4">
         {title}
       </h2>
@@ -29,9 +29,9 @@ function CardList({ title, movies }) {
           {/* Left Arrow */}
           <button
             onClick={handlePrev}
-            className="hidden sm:flex items-center justify-center w-10 h-10 bg-black/50 text-white rounded-full absolute left-2 top-1/2 -translate-y-1/2 z-20 hover:bg-black/80 transition"
+            className="flex items-center justify-center w-10 h-10 bg-black/50 text-white rounded-full absolute left-2 top-1/2 -translate-y-1/2 z-20 hover:bg-black/80 transition font-bold"
           >
-            ◀
+            {"<"}
           </button>
 
           {/* Slider */}
@@ -65,7 +65,7 @@ function CardList({ title, movies }) {
           {/* Right Arrow */}
           <button
             onClick={handleNext}
-            className="hidden sm:flex items-center justify-center w-10 h-10 bg-black/50 text-white rounded-full absolute right-2 top-1/2 -translate-y-1/2 z-20 hover:bg-black/80 transition"
+            className="sm:flex items-center justify-center w-10 h-10 bg-black/50 text-white rounded-full absolute right-2 top-1/2 -translate-y-1/2 z-20 hover:bg-black/80 transition"
           >
             ▶
           </button>

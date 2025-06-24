@@ -87,12 +87,12 @@ function Login() {
     setIsSignInForm(!isSignInForm);
   };
   return (
-    <div className="relative w-full min-h-screen font-sans">
+    <div className="relative w-full min-h-screen font-sans overflow-hidden">
       {/* Header */}
       <Header />
 
       {/* Background Image */}
-      <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 ">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/8200f588-2e93-4c95-8eab-ebba17821657/web/IN-en-20250616-TRIFECTA-perspective_9cbc87b2-d9bb-4fa8-9f8f-a4fe8fc72545_medium.jpg"
           alt="Background"
